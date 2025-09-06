@@ -1,6 +1,6 @@
 #############################################################################
 #                                                                           #
-#    \* -------- 💫 https://www.youtube.com/@Ruben-Linux 💫 -------- */    #
+#    \* -------- 💫 https://www.youtube.com/@Ruben-Linux 💫 ---------- */    #
 #     \* .......... sway config made by: Ruben_&_Linux:~ ........... */     #
 #                           Arch Linux simple -2025-                        #
 #                           _____      ____ _ _   _                         #
@@ -303,7 +303,7 @@ set $opacity 0.5
 ### Sway theme ###
 ##################
 #
-font pango:Sans 11
+font pango:Adwaita Sans Medium 11
 #                       Border  Back.   Text    Indi.   child_border
 client.focused          #dedede #285577 #ffffff #a0a0a0 #a0a0a0
 client.unfocused        #dedede #1a1a1a #a6e3a1 #2a2e2e

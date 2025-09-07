@@ -394,3 +394,4 @@ for_window [app_id="firefox" title="Firefox — Sharing Indicator"] kill
 ###############
 # As an example, not used
 include /etc/sway/config.d/*
+#

@@ -326,8 +326,6 @@ exec_always nm-applet --indicator
 exec autotiling --splitwidth 0.9
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec brightnessctl set 100%
-#exec /usr/bin/octopi-notifier
-#exec copyq --start-server
 
 ####################
 ### window rules ###

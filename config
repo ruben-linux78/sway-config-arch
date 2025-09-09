@@ -1,6 +1,6 @@
 #############################################################################
 #                                                                           #
-#    \* -------- 💫 https://www.youtube.com/@Ruben-Linux 💫 -------- */    #
+#    \* -------- 💫 https://www.youtube.com/@Ruben-Linux 💫 ---------- */    #
 #     \* .......... sway config made by: Ruben_&_Linux:~ ........... */     #
 #                           Arch Linux simple -2025-                        #
 #                           _____      ____ _ _   _                         #
@@ -330,7 +330,6 @@ exec autotiling --splitwidth 0.9
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec brightnessctl set 100%
 #exec /usr/bin/octopi-notifier
-#exec copyq --start-server
 
 ####################
 ### window rules ###
@@ -352,7 +351,6 @@ for_window [title="Save Files"] floating enable, resize set width 50 ppt height 
 for_window [title="Save Folder"] floating enable, resize set width 50 ppt height 60 ppt
 for_window [title="File Operation Progress"] floating enable, sticky enable
 for_window [app_id="virt-manager"] floating enable
-for_window [app_id="copyq"] floating enable, sticky enable, resize set height 600px width 550px, move position cursor, move down 330
 for_window [class="network-manager-gnome"] floating enable
 for_window [app_id="nm-connection-editor"] floating enable
 for_window [app_id="moe.launcher.the-honkers-railway-launcher"] floating enable

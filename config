@@ -1,0 +1,422 @@
+#############################################################################
+#                                                                           #
+#    \* -------- 💫 https://www.youtube.com/@Ruben-Linux 💫 -------- */    #
+#     \* .......... sway config made by: Ruben_&_Linux:~ ........... */     #
+#                           Arch Linux simple -2025-                        #
+#                           _____      ____ _ _   _                         #
+#                          / __\ \ /\ / / _` | | | |                        #
+#                          \__ \\ V  V / (_| | |_| |                        #
+#                          |___/ \_/\_/ \__,_|\__| |                        #
+#                                             |___/                         #
+#############################################################################
+#
+###########################
+### Import Color Scheme ###
+###########################
+# As an example, not used
+include catppuccin-mocha
+
+#################
+### Variables ###
+#################
+#
+# Logo key. Use Mod1 for Alt.
+set $mod Mod4
+
+set $scale 1.0
+set $border_size 2
+set $border_size_floating 3
+# Home row direction keys, like vim
+set $left h
+set $down j
+set $up k
+set $right l
+
+# Your preferred terminal emulator
+set $term foot
+
+# Your preferred application launcher
+set $menu rofi -show drun -show-icons 
+
+# Clear #
+set $clear #ffffff00
+
+# Make all windows floating by default
+for_window [class=".*"] floating enable
+
+# Enable window dragging/resizing with Super key + mouse
+floating_modifier $mod
+
+############################
+### Output configuration ###
+############################
+#
+# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
+output * bg /home/ruben/Imágenes/Wallpapers/warrior.png fill
+#
+# Example configuration:
+#
+#   output HDMI-A-1 resolution 1920x1080 position 1920,0
+#
+# You can get the names of your outputs by running: swaymsg -t get_outputs
+
+################
+### Swayidle ###
+################
+#
+# This will lock your screen after 600 seconds of inactivity, then turn off
+# your displays after another 900 seconds, and turn your screens back on when
+# resumed. It will also lock your screen before your computer goes to sleep.
+
+exec swayidle -w \
+    timeout 600 'swaylock -f -c 000000' \
+    timeout 900 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+    before-sleep 'swaylock -f -c 000000'
+
+###########################
+### Input configuration ###
+###########################
+#
+input "2:7:SynPS/2_Synaptics_TouchPad" {
+    dwt enabled
+    tap enabled
+    natural_scroll enabled
+    middle_emulation enabled
+}
+
+#######################
+### Keyboard layout ###
+#######################
+# 
+input * {
+    xkb_layout "es"
+    xkb_variant ""
+    xkb_options "grp:win_space_toggle"
+    xkb_model "pc105"
+}
+input "type:touchpad" {
+    tap enabled
+    natural_scroll disabled
+    accel_profile adaptive
+    click_method clickfinger
+    drag enabled
+    drag_lock enabled
+    dwt enabled
+    middle_emulation enabled
+    pointer_accel 1.0
+}
+input * xkb_numlock enable
+
+####################
+### Key bindings ###
+####################
+#
+# Basics:
+#
+    # Start a terminal
+    bindsym $mod+Return exec $term
+
+    # Start kitty
+    bindsym $mod+Shift+Return exec kitty
+
+    # Kill focused window
+    bindsym $mod+q kill
+
+    # Start your launcher
+    bindsym $mod+p exec $menu
+
+    # Start mousepad
+    bindsym $mod+e exec mousepad
+
+    # Start firefox
+    bindsym $mod+w exec firefox
+    
+    # Start thunar
+    bindsym $mod+n exec thunar 
+
+    # Start wofi    
+    bindsym $mod+d exec wofi -i --show drun --allow-images --run gtk-update-icon-cache
+
+    # Start fuzzel
+    bindsym $mod+o exec fuzzel
+
+    # Start nwg-drawer
+    bindsym $mod+Shift+d exec nwg-drawer -mb 10 -mr 10 -ml 10 -mt 10   
+    
+    # Lock screen
+    bindsym $mod+t exec gtklock
+
+    # Powermenu
+    bindsym $mod+x exec ~/.config/waybar/scripts/power-menu
+    
+    # Change wallpaper
+    bindsym $mod+y exec ~/.config/waybar/scripts/change-wall
+
+    # Drag floating windows by holding down $mod and left mouse button.
+    floating_modifier $mod normal
+
+    # Reload the configuration file
+    bindsym $mod+Shift+c reload
+
+    # Exit sway (logs you out of your Wayland session)
+    bindsym $mod+Shift+x exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+#
+# Moving around:
+#
+# Move your focus around
+    bindsym $mod+$left focus left
+    bindsym $mod+$down focus down
+    bindsym $mod+$up focus up
+    bindsym $mod+$right focus right
+    # Or use $mod+[up|down|left|right]
+    bindsym $mod+Left focus left
+    bindsym $mod+Down focus down
+    bindsym $mod+Up focus up
+    bindsym $mod+Right focus right
+    # Move the focused window with the same, but add Shift
+    bindsym $mod+Shift+$left move left
+    bindsym $mod+Shift+$down move down
+    bindsym $mod+Shift+$up move up
+    bindsym $mod+Shift+$right move right
+    # Ditto, with arrow keys
+    bindsym $mod+Shift+Left move left
+    bindsym $mod+Shift+Down move down
+    bindsym $mod+Shift+Up move up
+    bindsym $mod+Shift+Right move right
+#
+# Workspaces:
+#
+# Switch to workspace
+    bindsym $mod+1 workspace number 1
+    bindsym $mod+2 workspace number 2
+    bindsym $mod+3 workspace number 3
+    bindsym $mod+4 workspace number 4
+    bindsym $mod+5 workspace number 5
+    bindsym $mod+6 workspace number 6
+    bindsym $mod+7 workspace number 7
+    bindsym $mod+8 workspace number 8
+    bindsym $mod+9 workspace number 9
+    bindsym $mod+0 workspace number 10
+    # Move focused container to workspace
+    bindsym $mod+Shift+1 move container to workspace number 1
+    bindsym $mod+Shift+2 move container to workspace number 2
+    bindsym $mod+Shift+3 move container to workspace number 3
+    bindsym $mod+Shift+4 move container to workspace number 4
+    bindsym $mod+Shift+5 move container to workspace number 5
+    bindsym $mod+Shift+6 move container to workspace number 6
+    bindsym $mod+Shift+7 move container to workspace number 7
+    bindsym $mod+Shift+8 move container to workspace number 8
+    bindsym $mod+Shift+9 move container to workspace number 9
+    bindsym $mod+Shift+0 move container to workspace number 10
+    # Note: workspaces can have any name you want, not just numbers.
+    # We just use 1-10 as the default.
+#
+# Layout stuff:
+#
+    # You can "split" the current object of your focus with
+    # $mod+b or $mod+v, for horizontal and vertical splits
+    # respectively.
+    bindsym $mod+b splith
+    bindsym $mod+v splitv
+
+    # Switch the current container between different layout styles
+    bindsym $mod+s layout stacking
+    bindsym $mod+Shift+w layout tabbed
+    bindsym $mod+Shift+e layout toggle split
+
+    # Make the current focus fullscreen
+    bindsym $mod+Shift+f fullscreen toggle
+
+    # Toggle the current focus between tiling and floating mode
+    bindsym $mod+Shift+space floating toggle
+
+    # Swap focus between the tiling area and the floating area
+    bindsym $mod+space focus mode_toggle
+
+    # Move focus to the parent container
+    bindsym $mod+a focus parent
+
+    # Float window and move to center...
+    bindsym $mod+c exec swaymsg '[con_id=__focused__] floating enable, resize set 70 ppt 70 ppt, move position center'
+#
+# Scratchpad:
+#
+    # Sway has a "scratchpad", which is a bag of holding for windows.
+    # You can send windows there and get them back later.
+
+    # Move the currently focused window to the scratchpad
+    bindsym $mod+Shift+minus move scratchpad
+
+    # Show the next scratchpad window or hide the focused scratchpad window.
+    # If there are multiple scratchpad windows, this command cycles through them.
+    bindsym $mod+minus scratchpad show
+#
+# Resizing containers:
+#
+    mode "resize" {
+    bindsym $left resize shrink width 10px
+    bindsym $down resize grow height 10px
+    bindsym $up resize shrink height 10px
+    bindsym $right resize grow width 10px
+    # Ditto, with arrow keys
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
+#
+# Return to default mode:
+#
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+    bindsym $mod+r mode "resize"
+
+#################
+### Utilities ###
+#################
+#
+# Special keys to adjust volume via PulseAudio
+    bindsym --locked XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+    bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+    bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+    bindsym --locked XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+# Special keys to adjust brightness via brightnessctl
+    bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
+    bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
+# Play
+    bindsym XF86AudioPlay exec playerctl play-pause
+    bindsym XF86AudioNext exec playerctl next
+    bindsym XF86AudioPrev exec playerctl previous
+# Screenshots:
+    bindsym $mod+Ctrl+a exec grim-shot full
+    bindsym $mod+Shift+a exec grim-shot area
+    bindsym $mod+Alt+a exec grim-shot window
+
+#####################
+### Look and Feel ###
+#####################
+#
+# Remvoe titlebars and just have a border
+default_border pixel 3
+
+# If only one window remove border
+smart_borders on
+
+# Gaps
+gaps inner 5
+gaps outer 5
+focus_follows_mouse yes
+default_border pixel 2
+default_floating_border pixel 3
+
+set $opacity 0.5
+
+##################
+### Sway theme ###
+##################
+#
+font pango:Adwaita Sans Medium 11
+#                       Border  Back.   Text    Indi.   child_border
+client.focused          #dedede #285577 #ffffff #a0a0a0 #a0a0a0
+client.unfocused        #dedede #1a1a1a #a6e3a1 #2a2e2e
+client.focused_inactive #1f1f1f #161616 #a6e3a1 #1f1f1f
+client.urgent           #32cd32 #1e1e2e #ffffff #32cd32
+client.placeholder      #000000 #0c0c0c #ffffff #000000
+client.background       #000000
+
+default_border pixel $border_size
+default_floating_border pixel $border_size_floating
+hide_edge_borders smart
+
+#################
+### Autostart ###
+#################
+# 
+exec mako 
+exec waybar
+exec_always nm-applet --indicator
+exec autotiling --splitwidth 0.9
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec brightnessctl set 100%
+#exec /usr/bin/octopi-notifier
+#exec copyq --start-server
+
+####################
+### window rules ###
+####################
+#
+for_window [app_id="firefox*"] floating enable
+for_window [app_id="org.telegram*"] floating enable
+for_window [app_id="vlc*"] floating enable
+for_window [app_id="thunar*"] floating enable
+for_window [app_id = "qt5ct"] floating enable
+for_window [app_id = "qt6ct"] floating enable
+for_window [app_id="nwg-look"] floating enable
+for_window [title="htop"] floating enable
+for_window [title="Open File"] floating enable, resize set width 50 ppt height 60 ppt
+for_window [title="Open Files"] floating enable, resize set width 50 ppt height 60 ppt
+for_window [title="Open Folder"] floating enable, resize set width 50 ppt height 60 ppt
+for_window [title="Save File"] floating enable, resize set width 50 ppt height 60 ppt
+for_window [title="Save Files"] floating enable, resize set width 50 ppt height 60 ppt
+for_window [title="Save Folder"] floating enable, resize set width 50 ppt height 60 ppt
+for_window [title="File Operation Progress"] floating enable, sticky enable
+for_window [app_id="virt-manager"] floating enable
+for_window [app_id="Virt-manager"] move scratchpad, scratchpad show
+for_window [app_id="Virt-manager"] resize set width 930 height 510
+for_window [app_id="Virt-manager"] move position center
+for_window [app_id="copyq"] floating enable, sticky enable, resize set height 930px width 550px, move position cursor, move down 330
+for_window [class="network-manager-gnome"] floating enable
+for_window [class="nm-connection-editor"] floating enable
+for_window [app_id="moe.launcher.the-honkers-railway-launcher"] floating enable
+for_window [app_id="scratch"] move scratchpad, scratchpad show
+for_window [app_id="scratch"] floating enable
+for_window [app_id="scratch"] resize set width 1885 height 510
+for_window [app_id="scratch"] move position 10 540
+for_window [app_id="pamac*"] floating enable
+for_window [app_id="pamac*"] move scratchpad, scratchpad show
+for_window [app_id="pamac*"] resize set width 930 height 510
+for_window [app_id="pamac*"] move position center
+for_window [app_id="octopi*"] floating enable
+for_window [app_id="octopi*"] move scratchpad, scratchpad show
+for_window [app_id="octopi*"] resize set width 930 height 510
+for_window [app_id="octopi*"] move position center
+for_window [app_id="octoxbps*"] floating enable
+for_window [app_id="octoxbps*"] move scratchpad, scratchpad show
+for_window [app_id="octoxbps*"] resize set width 930 height 510
+for_window [app_id="octoxbps*"] move position center
+for_window [app_id="transmission"] move scratchpad, scratchpad show
+for_window [app_id="transmission"] floating enable
+for_window [app_id="transmission"] resize set width 930 height 510
+for_window [app_id="transmission"] move position 10 10
+for_window [app_id="pavucontrol"] move scratchpad, scratchpad show
+for_window [app_id="pavucontrol"] floating enable
+for_window [app_id="Telegram"] resize set width 930 height 510
+for_window [app_id="Telegram"] move position center
+for_window [app_id="blueman"] floating enable
+for_window [app_id="blueman"] resize set width 930 height 510
+for_window [app_id="blueman"] move position center
+for_window [app_id="pulse"] floating enable
+for_window [app_id="pulse"] resize set width 930 height 510
+for_window [app_id="pulse"] move position center
+# set floating for window roles
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="bubble"] floating enable
+for_window [window_role="dialog"] floating enable
+for_window [window_type="dialog"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [window_type = "menu"] floating enable
+for_window [window_role = "GtkFileChooserDialog"] resize set 600 400
+for_window [window_role = "GtkFiileChooserDialog"] move position center
+for_window [window_role="Preferences"] floating enable
+for_window [window_role="About"] floating enable
+for_window [app_id="firefox" title="^Library$"] floating enable, border pixel 1, sticky enable, resize set width 40 ppt height 30 ppt
+for_window [app_id="floating_shell_portrait"] floating enable, border pixel 1, sticky enable, resize set width 30 ppt height 40 ppt
+for_window [title="Picture in picture"] floating enable, sticky enable
+for_window [app_id="xsensors"] floating enable
+for_window [app_id="firefox" title="Firefox — Sharing Indicator"] kill
+
+###############
+### Include ###
+###############
+# As an example, not used
+include /etc/sway/config.d/*
